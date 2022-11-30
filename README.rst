@@ -23,11 +23,11 @@
         :alt: Twitter
         :target: https://twitter.com/ezeeresult
 
-.. image:: https://img.shields.io/badge/-PyScaffold-005CA0?logo=pyscaffold
-    :alt: Project generated with PyScaffold
-    :target: https://pyscaffold.org/
+.. .. image:: https://img.shields.io/badge/-PyScaffold-005CA0?logo=pyscaffold
+..     :alt: Project generated with PyScaffold
+..     :target: https://pyscaffold.org/
 
-|
+.. |
 
 ==========
 ezeeresult
@@ -37,13 +37,13 @@ ezeeresult
     Marks scraper for MCA (REVISED 2020) latest semester.
 
 
-A longer description of your project goes here...
+.. A longer description of your project goes here...
 
 
 .. _pyscaffold-notes:
 
-Note
-====
+.. Note
+.. ====
 
-This project has been set up using PyScaffold 4.3.1. For details and usage
-information on PyScaffold see https://pyscaffold.org/.
+.. This project has been set up using PyScaffold 4.3.1. For details and usage
+.. information on PyScaffold see https://pyscaffold.org/.
