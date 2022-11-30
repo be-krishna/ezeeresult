@@ -12,13 +12,12 @@ from rich.table import Table
 
 
 def first_run() -> bool:
-    print('Invoked!')
     if os.path.exists("./.first"):
-        return True
+        return False
     else:
         with open("./.first", 'w') as f:
             f.write("Hey! you discovered me!")
-        return False
+        return True
 
 
 def static_table(rows: list) -> Table:
