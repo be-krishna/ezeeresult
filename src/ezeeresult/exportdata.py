@@ -112,7 +112,6 @@ def export(df: pd.DataFrame, sseat: int, eseat: int, semester: str, filename: st
                         dynamic_table(rows, columns),
                         title="Saved Files",
                         border_style="green",
-                        padding=(1, 1),
                     ))
                 progress.update(parsing_task, advance=1)
 
@@ -124,7 +123,7 @@ def export(df: pd.DataFrame, sseat: int, eseat: int, semester: str, filename: st
 
                 layout['bottom-right'].update(
                     Panel(itxt, title=e or "Error",
-                          border_style='green', padding=(1, 1))
+                          border_style='green', )
                 )
 
                 save_one(str(x.SeatNo), x.Mother, x.Student)
@@ -140,7 +139,6 @@ def export(df: pd.DataFrame, sseat: int, eseat: int, semester: str, filename: st
                         dynamic_table(rows, columns=columns),
                         title="Saved Files",
                         border_style="green",
-                        padding=(1, 1),
                     ))
                 progress.update(parsing_task, advance=1)
 
@@ -148,18 +146,23 @@ def export(df: pd.DataFrame, sseat: int, eseat: int, semester: str, filename: st
             bot10 = _bot10s(collected)
             layout['top-right-top'].update(
                 Panel(static_table(top10), title="Top Rankers", border_style="green",
-                      padding=(1, 1))
+                      )
             )
             layout['top-right-bottom'].update(
                 Panel(static_table(bot10), title="Bottom Rankers", border_style="green",
-                      padding=(1, 1))
+                      )
             )
             time.sleep(0.1)
         collected = pd.DataFrame(collected)
 
-        if not filename or filename == "marks-[semsester].xlsx":
+        if not filename:
             filename = f"marks-{semester}.xlsx"
-
+        elif filename == "marks-[semsester].xlsx":
+            filename = f"marks-{semester}.xlsx"
+        else:
+            fname, ext = os.path.splitext(filename)
+            if not ext:
+                filename = f"{fname}.xlsx"
         file_path = _toexcel(collected, semester, filename)
 
         layout['bottom-right'].update(
@@ -192,8 +195,6 @@ def _toexcel(data: pd.DataFrame, sem: Semester, filename: str):
     Write dataframe to excel file
     """
     wb = Workbook()
-
-    filename = filename or 'marks_details.xlsx'
 
     ws = wb.active
     ws.title = f'semester-{sem}'

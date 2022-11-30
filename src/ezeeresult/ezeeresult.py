@@ -1,8 +1,9 @@
 import signal
+import subprocess
 
 import click
 from .exportdata import export
-from .helpers import connectioncheck, signal_handler
+from .helpers import connectioncheck, signal_handler, first_run
 from .parsepdf import pdf_to_df
 from .savefile import save_all
 
@@ -64,6 +65,13 @@ def run():
 
     # if the system has no internet, halt execution
     connectioncheck()
+
+    # if this is first run of application, run command 'playwright install'
+    if first_run():
+        click.echo("Hey! Need to install few things. Hold on...")
+        status = subprocess.run(["playwright", "install"])
+        if not status.returncode == 0:
+            raise SystemExit("Something went wrong! Try running `playwright install`")
 
     while True:
         # main entry function

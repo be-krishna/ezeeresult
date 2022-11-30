@@ -67,7 +67,7 @@ def save_all(data: pd.DataFrame):
     layout['bottom-right'].update(
         Panel(
             Align.center(
-                "[bold green]Calculating...[/bold green]", vertical="middle"),
+                "[bold green]Downloading...[/bold green]", vertical="middle"),
             title="Status",
             border_style="green",
             title_align="center"
@@ -153,15 +153,15 @@ def save_all(data: pd.DataFrame):
                 f"[bold green]Downloaded {file_count} of {len(data.index)} files.[/bold green]", justify="center"
             )
 
-            txt_bot = Text.from_markup(
-                f"[bold green]Pages saved at:[/bold green] [red]{__FOLDER}[/red]", justify="center")
+            # txt_bot = Text.from_markup(
+            #     f"[bold green]Pages saved at:[/bold green] [red]{__FOLDER}[/red]", justify="center")
 
-            txt_grp = Group(txt_top, txt_bot)
+            # txt_grp = Group(txt_top, txt_bot)
 
             layout['bottom-right'].update(
                 Panel(
                     Align.center(
-                        txt_grp, vertical="middle"),
+                        txt_top, vertical="middle"),
                     title="Status",
                     border_style="green",
                     title_align="center"

@@ -11,6 +11,15 @@ from rich.layout import Layout
 from rich.table import Table
 
 
+def first_run() -> bool:
+    if os.path.exists("./.first"):
+        return True
+    else:
+        with open("./.first", 'w') as f:
+            f.write("Hey! you discovered me!")
+        return False
+
+
 def static_table(rows: list) -> Table:
     """Simple table used to render information of top and bottom performers"""
 
