@@ -157,7 +157,7 @@ def export(df: pd.DataFrame, sseat: int, eseat: int, semester: str, filename: st
             time.sleep(0.1)
         collected = pd.DataFrame(collected)
 
-        if not filename:
+        if not filename or filename == "marks-[semsester].xlsx":
             filename = f"marks-{semester}.xlsx"
 
         file_path = _toexcel(collected, semester, filename)

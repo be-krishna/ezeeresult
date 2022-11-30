@@ -9,7 +9,6 @@ from .savefile import save_all
 
 @click.command()
 @click.option('--file',
-              #   default="/home/be-krishna/Practice/Python/pypackage/ezeeresult/ezeeresult/name_list_2020.pdf",
               prompt='PDF file',
               help="File containg name, seatno and mothername of students.")
 @click.option('--semester',
@@ -33,7 +32,8 @@ from .savefile import save_all
               show_default=False,
               help="Ending seat no of the given semester.")
 @click.option('--outfile',
-              prompt=f'Output file name (default: marks-[semsester].xlsx)',
+              prompt=f'Output file name',
+              default="marks-[semsester].xlsx",
               show_default=False,
               help="Excel file name to which data will be written.")
 def main(file: str, semester: str, sseat: int, eseat: int, outfile: str):
