@@ -1,4 +1,5 @@
 import os
+import pathlib
 import socket
 import sys
 from collections import deque
@@ -12,10 +13,11 @@ from rich.table import Table
 
 
 def first_run() -> bool:
-    if os.path.exists("./.first"):
+    __FOLDER = os.path.join(pathlib.Path.home(), ".ezeeresult")
+    if os.path.exists(f"{__FOLDER}/.first"):
         return False
     else:
-        with open("./.first", 'w') as f:
+        with open(f"{__FOLDER}/.first", 'w') as f:
             f.write("Hey! you discovered me!")
         return True
 
