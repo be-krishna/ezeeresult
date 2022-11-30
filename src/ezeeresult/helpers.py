@@ -12,6 +12,7 @@ from rich.table import Table
 
 
 def first_run() -> bool:
+    print('Invoked!')
     if os.path.exists("./.first"):
         return True
     else:
