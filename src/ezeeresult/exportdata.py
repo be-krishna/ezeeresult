@@ -106,7 +106,7 @@ def export(df: pd.DataFrame, sseat: int, eseat: int, semester: str, filename: st
                                semester, x.SeatNo, x.Student)
                 collected.append(parsed)
 
-                rows.append((str(x.SeatNo), str(x.Student), str(semester)))
+                rows.append((str(x.SeatNo), str(x.Student), str(x.PRN)))
                 layout['top-left'].update(
                     Panel(
                         dynamic_table(rows, columns),
@@ -132,7 +132,7 @@ def export(df: pd.DataFrame, sseat: int, eseat: int, semester: str, filename: st
 
                 collected.append(parsed)
 
-                rows.append((str(x.SeatNo), str(x.Student), str(semester)))
+                rows.append((str(x.SeatNo), str(x.Student), str(x.PRN)))
 
                 layout['top-left'].update(
                     Panel(
