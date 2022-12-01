@@ -41,7 +41,7 @@ def main(file: str, semester: str, sseat: int, eseat: int, outfile: str):
     data = pdf_to_df(file)
 
     # check if seat no are valid
-    seat_check(data, sseat, eseat)
+    # seat_check(data, sseat, eseat)
 
     # clear the screen before proceeding
     click.clear()
