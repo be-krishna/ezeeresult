@@ -7,10 +7,23 @@ from enum import Enum
 
 import requests
 import pandas as pd
-from rich import box
+from rich import box, print
 from rich.console import Console
 from rich.layout import Layout
 from rich.table import Table
+from rich.text import Text
+from rich.panel import Panel
+
+
+def show_panel():
+    txt = Text.from_markup(
+        "[bold green]Result Scraper \n [red]MASTER OF COMPUTER APPLICATIONS (REVISED 2020)[/red][/bold green]"
+    )
+    txt.justify = 'center'
+
+    panel = Panel(txt)
+    panel.title_align = 'center'
+    print(panel)
 
 
 def first_run() -> bool:

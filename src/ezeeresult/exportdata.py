@@ -90,7 +90,7 @@ def export(df: pd.DataFrame, sseat: int, eseat: int, semester: str, filename: st
         )
     )
 
-    columns = ["Seat No", "Name", "Semester"]
+    columns = ["Seat No", "Name", "PRN"]
 
     _, height = os.get_terminal_size()
     rows = deque(maxlen=height-15)

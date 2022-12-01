@@ -2,46 +2,54 @@ import signal
 import subprocess
 
 import click
+from rich.text import Text
 from .exportdata import export
-from .helpers import connectioncheck, signal_handler, first_run, seat_check
+from .helpers import connectioncheck, signal_handler, first_run, seat_check, show_panel
 from .parsepdf import pdf_to_df
 from .savefile import save_all
 
 
 @click.command()
-@click.option('--file',
-              prompt='PDF file',
-              help="File containg name, seatno and mothername of students.")
-@click.option('--semester',
-              default="I",
-              prompt='Select semester',
-              type=click.Choice(
-                  ['I', 'II', 'III', 'IV'],
-                  case_sensitive=False
-              ),
-              help="Result semester.")
-@click.option('--sseat',
-              prompt='Start seat no.(0 - starts from top)',
-              type=click.types.INT,
-              default=0,
-              show_default=False,
-              help="Starting seat no of the given semester.")
-@click.option('--eseat',
-              prompt='End seat no.(0 - stops at last)',
-              type=click.types.INT,
-              default=0,
-              show_default=False,
-              help="Ending seat no of the given semester.")
-@click.option('--outfile',
-              prompt=f'Output file name',
-              default="marks-[semsester].xlsx",
-              show_default=False,
-              help="Excel file name to which data will be written.")
+@click.option(
+    "--file",
+    prompt=click.style("PDF file", fg="cyan"),
+    help="File containg name, seatno and mothername of students.",
+)
+@click.option(
+    "--semester",
+    default="I",
+    prompt=click.style("Select semester", fg="cyan"),
+    type=click.Choice(["I", "II", "III", "IV"], case_sensitive=False),
+    help="Result semester.",
+)
+@click.option(
+    "--sseat",
+    prompt=click.style("Start seat no.(0 - starts from top)", fg="cyan"),
+    type=click.types.INT,
+    default=0,
+    show_default=False,
+    help="Starting seat no of the given semester.",
+)
+@click.option(
+    "--eseat",
+    prompt=click.style("End seat no.(0 - stops at last)", fg="cyan"),
+    type=click.types.INT,
+    default=0,
+    show_default=False,
+    help="Ending seat no of the given semester.",
+)
+@click.option(
+    "--outfile",
+    prompt=click.style("Output file name", fg="cyan"),
+    default="marks-[semsester].xlsx",
+    show_default=False,
+    help="Excel file name to which data will be written.",
+)
 def main(file: str, semester: str, sseat: int, eseat: int, outfile: str):
     data = pdf_to_df(file)
 
     # check if seat no are valid
-    # seat_check(data, sseat, eseat)
+    seat_check(data, sseat, eseat)
 
     # clear the screen before proceeding
     click.clear()
@@ -76,6 +84,8 @@ def run():
         if not status.returncode == 0:
             raise SystemExit("Something went wrong! Try running `playwright install`")
         click.clear()
+
+    show_panel()
 
     while True:
         # main entry function
