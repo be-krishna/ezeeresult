@@ -34,10 +34,12 @@ def first_run() -> bool:
     if os.path.exists(f"{__FOLDER}/.first"):
         return False
     else:
-        os.makedirs(__FOLDER)
-        with open(f"{__FOLDER}/.first", "w") as f:
-            f.write("Hey! you discovered me!")
-        return True
+        try:
+            os.makedirs(__FOLDER)
+        except FileExistsError:
+            with open(f"{__FOLDER}/.first", "w+") as f:
+                f.write("Hey! you discovered me!")
+            return True
 
 
 def seat_check(std_data: pd.DataFrame, sseat: int, eseat: int):
