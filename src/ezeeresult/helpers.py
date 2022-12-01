@@ -19,10 +19,10 @@ def show_panel():
     txt = Text.from_markup(
         "[bold green]Result Scraper \n [red]MASTER OF COMPUTER APPLICATIONS (REVISED 2020)[/red][/bold green]"
     )
-    txt.justify = 'center'
+    txt.justify = "center"
 
     panel = Panel(txt)
-    panel.title_align = 'center'
+    panel.title_align = "center"
     print(panel)
 
 
@@ -34,17 +34,18 @@ def first_run() -> bool:
     if os.path.exists(f"{__FOLDER}/.first"):
         return False
     else:
-        with open(f"{__FOLDER}/.first", 'w') as f:
+        os.makedirs(__FOLDER)
+        with open(f"{__FOLDER}/.first", "w") as f:
             f.write("Hey! you discovered me!")
         return True
 
 
 def seat_check(std_data: pd.DataFrame, sseat: int, eseat: int):
-    """ 
+    """
     Function to check if seat no is in valid range. And start seat no is not after end seat no.
     """
-    min_seat = std_data['SeatNo'].min()
-    max_seat = std_data['SeatNo'].max()
+    min_seat = std_data["SeatNo"].min()
+    max_seat = std_data["SeatNo"].max()
 
     if sseat and (sseat < min_seat or sseat > max_seat):
         raise SystemExit("Invalid Start SeatNo!")
@@ -108,15 +109,16 @@ class InvalidHTMLFileError(Exception):
 
 
 def connectioncheck():
-    """ 
+    """
     Function to check if the system is connected to internet and can reach the url.
     """
     url = "https://results.unipune.ac.in"
     ip = socket.gethostbyname(socket.gethostname())
 
-    if ip.startswith('127.0'):
+    if ip.startswith("127.0"):
         raise SystemExit(
-            "Your system has no internet connection! Please try again later.")
+            "Your system has no internet connection! Please try again later."
+        )
 
     if requests.get(url).status_code != 200:
         raise SystemExit(f"'{url}' not reachable! Please try again later.")
@@ -141,13 +143,13 @@ class Semester(Enum):
     @classmethod
     def get(cls, sem: str):
         match sem:
-            case 'I':
+            case "I":
                 return cls.FIRST
-            case 'II':
+            case "II":
                 return cls.SECOND
-            case 'II':
+            case "II":
                 return cls.THIRD
-            case 'IV':
+            case "IV":
                 return cls.FOURTH
             case _:
                 cls.FIRST
@@ -158,53 +160,53 @@ class Semester(Enum):
 
 SUBJECTS: dict = {
     Semester.FIRST: {
-        'JAVA': ['INT', 'EXT'],
-        'DSA': ['INT', 'EXT'],
-        'OOSE': ['INT', 'EXT'],
-        'OSC': ['INT', 'EXT'],
-        'NT': ['INT', 'EXT'],
-        'OC-I': ['INT', 'EXT'],
-        'OC-II': ['INT', 'EXT'],
-        'PRAC': ['INT', 'EXT'],
-        'MINI': ['INT', 'EXT'],
-        'SSKILL': ['INT', 'EXT'],
-        'HR-I': ['INT', 'EXT'],
-        'ISEC-I': ['INT', 'EXT'],
+        "JAVA": ["INT", "EXT"],
+        "DSA": ["INT", "EXT"],
+        "OOSE": ["INT", "EXT"],
+        "OSC": ["INT", "EXT"],
+        "NT": ["INT", "EXT"],
+        "OC-I": ["INT", "EXT"],
+        "OC-II": ["INT", "EXT"],
+        "PRAC": ["INT", "EXT"],
+        "MINI": ["INT", "EXT"],
+        "SSKILL": ["INT", "EXT"],
+        "HR-I": ["INT", "EXT"],
+        "ISEC-I": ["INT", "EXT"],
     },
     Semester.SECOND: {
-        'PYTHON': ['INT', 'EXT'],
-        'SPM': ['INT', 'EXT'],
-        'OT': ['INT', 'EXT'],
-        'AIT': ['INT', 'EXT'],
-        'ADBMS': ['INT', 'EXT'],
-        'OC-III': ['INT', 'EXT'],
-        'OC-IV': ['INT', 'EXT'],
-        'PRAC': ['INT', 'EXT'],
-        'MINI': ['INT', 'EXT'],
-        'SSKILL': ['INT', 'EXT'],
-        'HR-II': ['INT', 'EXT'],
-        'ISEC-II': ['INT']
+        "PYTHON": ["INT", "EXT"],
+        "SPM": ["INT", "EXT"],
+        "OT": ["INT", "EXT"],
+        "AIT": ["INT", "EXT"],
+        "ADBMS": ["INT", "EXT"],
+        "OC-III": ["INT", "EXT"],
+        "OC-IV": ["INT", "EXT"],
+        "PRAC": ["INT", "EXT"],
+        "MINI": ["INT", "EXT"],
+        "SSKILL": ["INT", "EXT"],
+        "HR-II": ["INT", "EXT"],
+        "ISEC-II": ["INT"],
     },
     Semester.THIRD: {
-        'MAD': ['INT', 'EXT'],
-        'DWDM': ['INT', 'EXT'],
-        'STQA': ['INT', 'EXT'],
-        'KRAI': ['INT', 'EXT'],
-        'CC': ['INT', 'EXT'],
-        'OC-V': ['INT', 'EXT'],
-        'OC-VI': ['INT', 'EXT'],
-        'PRAC': ['INT', 'EXT'],
-        'MINI': ['INT', 'EXT'],
-        'SSKILL': ['INT', 'EXT'],
-        'ISEC-III': ['INT', 'EXT'],
-        'SKD-I': ['INT', 'EXT'],
-        'ITC': ['INT', 'EXT'],
+        "MAD": ["INT", "EXT"],
+        "DWDM": ["INT", "EXT"],
+        "STQA": ["INT", "EXT"],
+        "KRAI": ["INT", "EXT"],
+        "CC": ["INT", "EXT"],
+        "OC-V": ["INT", "EXT"],
+        "OC-VI": ["INT", "EXT"],
+        "PRAC": ["INT", "EXT"],
+        "MINI": ["INT", "EXT"],
+        "SSKILL": ["INT", "EXT"],
+        "ISEC-III": ["INT", "EXT"],
+        "SKD-I": ["INT", "EXT"],
+        "ITC": ["INT", "EXT"],
     },
     Semester.FOURTH: {
-        'DEVOPS': ['INT', 'EXT'],
-        'PPM&OB': ['INT', 'EXT'],
-        'PROJ': ['INT', 'EXT'],
-        'ISEC-IV': ['INT', 'EXT'],
-        'SKD-II': ['INT', 'EXT'],
+        "DEVOPS": ["INT", "EXT"],
+        "PPM&OB": ["INT", "EXT"],
+        "PROJ": ["INT", "EXT"],
+        "ISEC-IV": ["INT", "EXT"],
+        "SKD-II": ["INT", "EXT"],
     },
 }
