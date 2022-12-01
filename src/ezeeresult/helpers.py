@@ -6,6 +6,7 @@ from collections import deque
 from enum import Enum
 
 import requests
+import pandas as pd
 from rich import box
 from rich.console import Console
 from rich.layout import Layout
@@ -13,6 +14,9 @@ from rich.table import Table
 
 
 def first_run() -> bool:
+    """
+    Function to check if this is the application's first run.
+    """
     __FOLDER = os.path.join(pathlib.Path.home(), ".ezeeresult")
     if os.path.exists(f"{__FOLDER}/.first"):
         return False
@@ -20,6 +24,21 @@ def first_run() -> bool:
         with open(f"{__FOLDER}/.first", 'w') as f:
             f.write("Hey! you discovered me!")
         return True
+
+
+def seat_check(std_data: pd.DataFrame, sseat: int, eseat: int):
+    """ 
+    Function to check if seat no is in valid range. And start seat no is not after end seat no.
+    """
+    min_seat = std_data['SeatNo'].min()
+    max_seat = std_data['SeatNo'].max()
+
+    if sseat and (sseat < min_seat or sseat > max_seat):
+        raise SystemExit("Invalid Start SeatNo!")
+    if eseat and (eseat < min_seat or eseat > max_seat):
+        raise SystemExit("Invalid End SeatNo!")
+    if (sseat and eseat) and (sseat > eseat):
+        raise SystemExit("Invalid Seat No(s)!")
 
 
 def static_table(rows: list) -> Table:
@@ -76,6 +95,9 @@ class InvalidHTMLFileError(Exception):
 
 
 def connectioncheck():
+    """ 
+    Function to check if the system is connected to internet and can reach the url.
+    """
     url = "https://results.unipune.ac.in"
     ip = socket.gethostbyname(socket.gethostname())
 

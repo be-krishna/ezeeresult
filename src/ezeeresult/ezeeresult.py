@@ -3,7 +3,7 @@ import subprocess
 
 import click
 from .exportdata import export
-from .helpers import connectioncheck, signal_handler, first_run
+from .helpers import connectioncheck, signal_handler, first_run, seat_check
 from .parsepdf import pdf_to_df
 from .savefile import save_all
 
@@ -40,6 +40,9 @@ from .savefile import save_all
 def main(file: str, semester: str, sseat: int, eseat: int, outfile: str):
     data = pdf_to_df(file)
 
+    # check if seat no are valid
+    seat_check(data, sseat, eseat)
+
     # clear the screen before proceeding
     click.clear()
 
@@ -72,6 +75,7 @@ def run():
         status = subprocess.run(["playwright", "install"])
         if not status.returncode == 0:
             raise SystemExit("Something went wrong! Try running `playwright install`")
+        click.clear()
 
     while True:
         # main entry function
